@@ -1,0 +1,6 @@
+let mapleader = "#"
+
+" Only enable on of the status line plugins
+call janus#disable_plugin('vim-statline')
+"call janus#disable_plugin('vim-powerline')
+

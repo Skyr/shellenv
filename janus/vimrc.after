@@ -1,0 +1,39 @@
+set encoding=utf-8
+
+" Number of color in terminal
+"set t_Co=16
+set t_Co=256
+
+if has('gui_running')
+  set background=light
+else
+  set background=dark
+endif
+let g:solarized_termcolors=256
+colorscheme solarized
+"colorscheme molokai
+
+set cursorline
+set cursorcolumn
+
+au BufNewFile,BufRead *.gradle set filetype=groovy
+au BufNewFile,BufRead *.tex set wrap
+" Kein Umbruch beim Tippen
+set textwidth=0
+set wrapmargin=0
+
+if janus#is_plugin_enabled('fugitive')
+  set statusline+=%{fugitive#statusline()}
+endif
+
+if janus#is_plugin_enabled('syntastic')
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+endif
+
+if janus#is_plugin_enabled('vim-powerline')
+  set laststatus=2
+  let g:Powerline_symbols = 'unicode'
+endif
+
