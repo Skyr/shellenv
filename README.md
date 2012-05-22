@@ -9,7 +9,7 @@ Contains (or will set up):
  * [Janus](https://github.com/carlhuda/janus), the awesome vim
    configuration
  * [Oh my zsh](https://github.com/robbyrussell/oh-my-zsh), the awesome
-   zhs config
+   zsh config
 
 Setup/update
 ------------

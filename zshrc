@@ -30,8 +30,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$HOME/bin/mks/bin
-export MANPATH=$HOME/bin/mks/etc
 
 alias du1="du -hs *(/)"
 
