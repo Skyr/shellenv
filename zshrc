@@ -25,8 +25,6 @@ ZSH_THEME="kphoen"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git github gnome archlinux gradle grails)
 
-source $ZSH/oh-my-zsh.sh
-
 # Customize to your needs...
 
 export PATH=$PATH:$HOME/bin
@@ -39,3 +37,5 @@ fi
 
 source $HOME/.zshrc.local
 
+
+source $ZSH/oh-my-zsh.sh
