@@ -10,17 +10,41 @@ function binaryInPath {
 	return 0
 }
 
-if ! binaryInPath python ; then
-	echo "Sorry, python required"
-	exit 1
+ABSOLUTE_LINKS=0
+if [ "$1" == "-a" ] ; then
+  ABSOLUTE_LINKS=1
 fi
 
+if ! binaryInPath python ; then
+  ABSOLUTE_LINKS=1
+fi
+
+function absoluteLink {
+  if [ -f "$1" ] ; then
+    pushd `dirname "$1"` > /dev/null
+  else
+    pushd "$1" > /dev/null
+  fi
+  ABSOLUTE_LINK=`pwd`
+  popd > /dev/null
+}
+
 function relativeToHome {
-	RELATIVE_TO_HOME=`python -c "import os.path; print os.path.relpath('$HOME', '$1')"`
+  if [ "$ABSOLUTE_LINKS" == "1" ] ; then
+    absoluteLink "$1"
+    RELATIVE_TO_HOME=$ABSOLUTE_LINK
+  else
+    RELATIVE_TO_HOME=`python -c "import os.path; print os.path.relpath('$HOME', '$1')"`
+  fi
 }
 
 function relativeFromHome {
-	RELATIVE_FROM_HOME=`python -c "import os.path; print os.path.relpath('$1', '$HOME')"`
+  if [ "$ABSOLUTE_LINKS" == "1" ] ; then
+    absoluteLink "$1"
+    RELATIVE_FROM_HOME=$ABSOLUTE_LINK
+  else
+    RELATIVE_FROM_HOME=`python -c "import os.path; print os.path.relpath('$1', '$HOME')"`
+  fi
 }
 
 # Path to shellenv, relative to $HOME
@@ -43,7 +67,7 @@ function isLinkToShellenv {
 	if [ -L "$FILENAME" ] ; then
 		LINKDEST="`readlink -f $FILENAME`"
 		relativeFromHome "$LINKDEST"
-		[[ "$RELATIVE_FROM_HOME" == *${SHELLENV_HOME}/* ]]
+		[[ "$RELATIVE_FROM_HOME" == *${SHELLENV_HOME}/* ]] || [[ "$RELATIVE_FROM_HOME" == "$SHELLENV_HOME" ]]
 	else
 		return 1
 	fi
@@ -68,14 +92,19 @@ function checkLinkToShellenv {
 	if ! isLinkToShellenv "$1" ; then
 		backupAndRemove "$1"
 		relativeToHome "`dirname $FILENAME`"
-		ln -s "$RELATIVE_TO_HOME/$SHELLENV_HOME/$2" "$FILENAME"
+    if [ "$ABSOLUTE_LINKS" == "1" ] ; then
+      ln -s "$SHELLENV_HOME/$2" "$FILENAME"
+    else
+      ln -s "$RELATIVE_TO_HOME/$SHELLENV_HOME/$2" "$FILENAME"
+    fi
 	fi
 }
 
 
 ### Main stuff ###
 
-cd "$HOME/$SHELLENV_HOME"
+cd "$HOME"
+cd "$SHELLENV_HOME"
 
 ### Symlink from $HOME/bin to all shell scripts in bin
 mkdir -p "$HOME/bin"
