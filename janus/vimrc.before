@@ -4,3 +4,6 @@ let mapleader = "#"
 call janus#disable_plugin('vim-statline')
 "call janus#disable_plugin('vim-powerline')
 
+if filereadable(expand("~/.vimrc.before.local"))
+    source ~/.vimrc.before.local
+endif

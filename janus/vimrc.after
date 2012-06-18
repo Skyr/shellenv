@@ -37,3 +37,7 @@ if janus#is_plugin_enabled('vim-powerline')
   let g:Powerline_symbols = 'unicode'
 endif
 
+if filereadable(expand("~/.vimrc.after.local"))
+    source ~/.vimrc.after.local
+endif
+
