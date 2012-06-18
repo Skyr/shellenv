@@ -112,6 +112,10 @@ for i in bin/* ; do
 	checkLinkToShellenv "$i" "$i"
 done
 
+### tmux conf
+checkLinkToShellenv .tmux.conf dotfiles/tmux.conf
+createFile .tmux.conf.local
+
 ### Set up Oh my zsh
 if binaryInPath zsh git ; then
 	checkLinkToShellenv .zshrc zshrc
@@ -140,6 +144,7 @@ if binaryInPath vi git rake ; then
 		checkLinkToShellenv .janus janus
 	else
 		pushd "$HOME/.vim" > /dev/null
+    git pull --recurse-submodules
 		rake > /dev/null
 		popd > /dev/null
 	fi
