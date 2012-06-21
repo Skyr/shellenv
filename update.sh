@@ -144,7 +144,7 @@ if binaryInPath vi git rake ; then
 		checkLinkToShellenv .janus janus
 	else
 		pushd "$HOME/.vim" > /dev/null
-    git pull --recurse-submodules
+    # git pull --recurse-submodules
 		rake > /dev/null
 		popd > /dev/null
 	fi
