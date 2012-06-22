@@ -23,7 +23,7 @@ ZSH_THEME="kphoen"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github gnome archlinux gradle grails)
+plugins=(git github gnome gradle grails screen)
 
 # Customize to your needs...
 
