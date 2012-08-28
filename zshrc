@@ -35,7 +35,10 @@ if [ "$TERM"=="xterm" ] && [ -e /usr/share/terminfo/x/xterm-256color ]; then
 	export TERM="xterm-256color"
 fi
 
-source $HOME/.zshrc.local
-
 
 source $ZSH/oh-my-zsh.sh
+
+
+source $HOME/.shellenv/gitignore-boilerplates/gibo-completion.zsh
+source $HOME/.zshrc.local
+

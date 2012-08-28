@@ -150,3 +150,6 @@ if binaryInPath vi git rake ; then
 	fi
 fi
 
+### Set up gibo
+checkLinkToShellenv bin/gibo gitignore-boilerplates/gibo
+
