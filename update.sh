@@ -155,4 +155,5 @@ checkLinkToShellenv bin/gibo gitignore-boilerplates/gibo
 
 ### Set up sbt
 checkLinkToShellenv .sbt/plugins/plugins.sbt sbt-plugins.sbt
+checkLinkToShellenv .sbt/user.sbt sbt-user.sbt
 
